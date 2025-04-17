@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>WL Tracker</title>
+  <link rel="stylesheet" href="tracker.css">
+</head>
+<body>
+
+  <h1>Weekend League Tracker</h1>
+  
+  <!-- Kezdő oldal -->
+  <div class="match-list" id="matchList"></div>
+
+  <div class="center-box hidden" id="scoreInput">
+    <div class="counter-container">
+      <div class="team-box gold">
+        <h2>Hazai</h2>
+        <button class="score-btn" onclick="changeScore('team1', 1)">+</button>
+        <div class="score" id="score-team1">0</div>
+        <button class="score-btn" onclick="changeScore('team1', -1)">-</button>
+      </div>
+      <div class="team-box">
+        <h2>Vendég</h2>
+        <button class="score-btn" onclick="changeScore('team2', 1)">+</button>
+        <div class="score" id="score-team2">0</div>
+        <button class="score-btn" onclick="changeScore('team2', -1)">-</button>
+      </div>
+    </div>
+    <button class="save" onclick="goToScorers()">Eredmény mentése</button>
+    <button class="save" onclick="backToMatchList()">Vissza a főmenübe</button>
+  </div>
+
+  <div class="center-box hidden" id="scorersInput">
+    <h2>Gólszerzők</h2>
+    <input type="text" id="scorersField" placeholder="pl. Ronaldo, Mbappé">
+    <button class="save" onclick="goToResultType()">Mentés</button>
+    <button class="save" onclick="backToScoreInput()">Vissza</button>
+    <button class="save" onclick="backToMatchList()">Vissza a főmenübe</button>
+  </div>
+
+  <div class="center-box hidden" id="resultTypeInput">
+    <h2>Győzelem vagy Vereség?</h2>
+    <button class="save" onclick="saveMatch('win')">Győzelem</button>
+    <button class="save" onclick="saveMatch('lose')">Vereség</button>
+    <button class="save" onclick="backToScorersInput()">Vissza</button>
+    <button class="save" onclick="backToMatchList()">Vissza a főmenübe</button>
+  </div>
+
+  <script>
+    const totalMatches = 15;
+    let matches = JSON.parse(localStorage.getItem("matches") || "[]");
+    if (matches.length !== totalMatches) {
+      matches = Array(totalMatches).fill(null);
+    }
+
+    let currentMatch = null;
+    let currentScores = { team1: 0, team2: 0 };
+
+    function renderMatchList() {
+      const container = document.getElementById("matchList");
+      container.innerHTML = "";
+
+      matches.forEach((match, index) => {
+        const btn = document.createElement("button");
+        btn.className = "match-btn";
+        if (match) {
+          btn.textContent = `${index + 1}. Meccs - ${match.score.team1}:${match.score.team2} (${match.result})`;
+        } else {
+          btn.textContent = `${index + 1}. Meccs`;
+          if (index > 0 && !matches[index - 1]) {
+            btn.classList.add("locked");
+            btn.disabled = true;
+          }
+        }
+        btn.onclick = () => startMatch(index);
+        container.appendChild(btn);
+      });
+    }
+
+    function startMatch(index) {
+      currentMatch = index;
+
+      const match = matches[index];
+      if (match) {
+        currentScores = { ...match.score };
+        document.getElementById("score-team1").textContent = currentScores.team1;
+        document.getElementById("score-team2").textContent = currentScores.team2;
+        document.getElementById("scorersField").value = match.scorers.join(", ");
+      } else {
+        currentScores = { team1: 0, team2: 0 };
+        document.getElementById("score-team1").textContent = 0;
+        document.getElementById("score-team2").textContent = 0;
+        document.getElementById("scorersField").value = "";
+      }
+
+      document.getElementById("matchList").classList.add("hidden");
+      document.getElementById("scoreInput").classList.remove("hidden");
+      document.getElementById("scorersInput").classList.add("hidden");
+      document.getElementById("resultTypeInput").classList.add("hidden");
+    }
+
+    function changeScore(team, delta) {
+      currentScores[team] = Math.max(0, currentScores[team] + delta);
+      document.getElementById(`score-${team}`).textContent = currentScores[team];
+    }
+
+    function goToScorers() {
+      document.getElementById("scoreInput").classList.add("hidden");
+      document.getElementById("scorersInput").classList.remove("hidden");
+    }
+
+    function goToResultType() {
+      document.getElementById("scorersInput").classList.add("hidden");
+      document.getElementById("resultTypeInput").classList.remove("hidden");
+    }
+
+    function saveMatch(result) {
+      const scorers = document.getElementById("scorersField").value
+        .split(",")
+        .map(x => x.trim())
+        .filter(x => x);
+
+      matches[currentMatch] = {
+        score: { ...currentScores },
+        scorers,
+        result
+      };
+
+      localStorage.setItem("matches", JSON.stringify(matches));
+      renderMatchList();
+      document.getElementById("resultTypeInput").classList.add("hidden");
+      document.getElementById("matchList").classList.remove("hidden");
+      currentMatch = null;
+    }
+
+    function backToMatchList() {
+      document.getElementById("scoreInput").classList.add("hidden");
+      document.getElementById("scorersInput").classList.add("hidden");
+      document.getElementById("resultTypeInput").classList.add("hidden");
+      document.getElementById("matchList").classList.remove("hidden");
+    }
+
+    function backToScoreInput() {
+      document.getElementById("scorersInput").classList.add("hidden");
+      document.getElementById("scoreInput").classList.remove("hidden");
+    }
+
+    function backToScorersInput() {
+      document.getElementById("resultTypeInput").classList.add("hidden");
+      document.getElementById("scorersInput").classList.remove("hidden");
+    }
+
+    renderMatchList();
+  </script>
+</body>
+</html>

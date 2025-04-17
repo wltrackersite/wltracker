@@ -1,0 +1,108 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    margin: 0;
+    padding: 25px;
+  }
+
+  h1 {
+    text-align: center;
+    color: gold;
+  }
+
+  .match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .match-btn {
+    padding: 15px;
+    font-size: 18px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .match-btn.locked {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .counter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 30px;
+    flex-wrap: wrap;
+  }
+
+  .team-box {
+    width: 250px;
+    background: linear-gradient(135deg, crimson, darkred);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  }
+  
+  .team-box.gold {
+    background: linear-gradient(135deg, gold, orange);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  }
+
+  .team-box h2 {
+    margin-top: 0;
+  }
+
+  .score {
+    font-size: 64px;
+    margin: 20px 0;
+  }
+
+  .score-btn {
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .center-box {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    border: none;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  button.save {
+    background-color: gold;
+    color: black;
+    padding: 12px 25px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+  }
