@@ -1,0 +1,316 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url(background.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 20px;
+  width: 100%;
+  max-width: 1300px;
+}
+
+.container {
+  background-color: #0B192F;
+  flex: 1 1 300px;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.player-select-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #0B192F;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 10;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  border-radius: 0 0 6px 6px;
+}
+
+.autocomplete-list div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocomplete-list div:hover {
+  background: #F1D086;
+  color: black;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #F1D086;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+input, select {
+  background-color: #142035;
+  color: white;
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+button {
+  background-color: #11336C;
+  color: #F0D081;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #F0D081;
+  color: #11336C;
+}
+
+input:disabled, select:disabled, button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.match-card {
+  background-color: rgba(255,255,255,0.05);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
+.logout-btn {
+  margin: 20px auto 0;
+  display: block;
+  width: 60%;
+  background: #c90c0c;
+  color: black;
+}
+
+.logout-btn:hover {
+  color: #c90c0c;
+  background-color: black;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ccc;
+  font-size: 18px;
+  z-index: 20;
+}
+
+.clear-btn:hover {
+  color: #F1D086;
+}
+
+.player-select {
+  border: none !important;
+  outline: none;
+  background: transparent;
+  width: 100%;
+}
+
+.player-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.goal-input {
+  flex: 0 1 100px;
+}
+
+#matchFormContainer {
+  order: 2;
+}
+
+#matchHistoryContainer {
+  order: 1;
+}
+
+#statsContainer {
+  order: 3;
+}
+
+@media (max-width: 900px) {
+  .flex-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .container {
+    max-width: 100% !important;
+  }
+}
+
+#matchList button {
+  background-color: #142035;
+  color: #F1D086;
+  border: 1px solid #334;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+#matchList button:hover {
+  background-color: #1b2a45;
+}
+
+.match-button {
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.match-button:hover {
+  background-color: #ddd;
+}
+
+.right-menu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.menu-button {
+  background: #11336C;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid #F1D086;
+  padding-bottom: 5px;
+  color: #F1D086;
+  transition: color 0.3s, border-bottom-color 0.3s;
+}
+.menu-button:hover {
+  background-color: #F1D086;
+  color: #11336C;
+  border-bottom-color: #fff;
+}
+
+
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.match-button {
+  padding: 8px 10px;
+  background-color: #11336C;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #F1D086;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.match-button:hover {
+  background-color: #F1D086;
+  color: #11336C;
+  transform: scale(1.05);
+}
+
+.match-button.locked {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 100px;
+  width: 100%;
+  max-width: 1650px;
+}
+
+.main-header {
+  display: flex;
+  align-items: center; /* A logóval egy vonalba helyezi a címsort */
+  justify-content: center; /* Középre igazítja a címsort */
+  color: white;
+  padding: 2px 10px; /* Csökkentett padding a fentebbi elhelyezéshez */
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.logo-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 80px;
+  height: 80px;
+  background-image: url('logo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>WL Tracker</title>
+  <link rel="stylesheet" href="wl_trackercss.css">
+  <script src="wl_trackerjava.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" type="image/x-icon" href="favico.png">
+  <img src="icon.png" class="logo-icon" />
+</head>
+<header class="main-header">
+  <h1>WL Tracker</h1>
+</header>
+<body>
+
+
+<div class="right-menu">
+    <button class="menu-button">Profilom</button>
+    <button class="menu-button">Beállítások</button>
+    <button class="menu-button">Súgó</button>
+</div>
+
+
+
+<div class="main-wrapper">
+  <!-- Bal oldali oszlop: Meccslista -->
+  <div class="container" id="matchHistoryContainer">
+    <h2>📑 WL Meccsek</h2>
+      <div class="match-list">
+          <button class="match-button">1. meccs</button>
+          <button class="match-button">2. meccs</button>
+          <button class="match-button">3. meccs</button>
+          <button class="match-button">4. meccs</button>
+          <button class="match-button">5. meccs</button>
+          <button class="match-button">6. meccs</button>
+          <button class="match-button">7. meccs</button>
+          <button class="match-button">8. meccs</button>
+          <button class="match-button">9. meccs</button>
+          <button class="match-button">10. meccs</button>
+          <button class="match-button">11. meccs</button>
+          <button class="match-button">12. meccs</button>
+          <button class="match-button">13. meccs</button>
+          <button class="match-button">14. meccs</button>
+          <button class="match-button">15. meccs</button>
+      </div>
+    </div>
+  
+
+  <!-- Középső oszlop: Meccsrögzítés -->
+  <div class="container" id="matchFormContainer">
+    <h1>🎮 WL Stat</h1>
+    <form id="matchForm">
+      <select id="result">
+        <option value="win">Győzelem</option>
+        <option value="loss">Vereség</option>
+      </select>
+
+
+      <div class="center-box" id="scoreInput">
+        <div class="counter-container">
+          <div class="team-box gold">
+            <h2>Hazai</h2>
+            <button class="score-btn" onclick="changeScore('team1', 1)">+</button>
+            <div class="score" id="score-team1">0</div>
+            <button class="score-btn" onclick="changeScore('team1', -1)">-</button>
+          </div>
+          <div class="team-box">
+            <h2>Vendég</h2>
+            <button class="score-btn" onclick="changeScore('team2', 1)">+</button>
+            <div class="score" id="score-team2">0</div>
+            <button class="score-btn" onclick="changeScore('team2', -1)">-</button>
+          </div>
+        </div>
+        <button class="save" onclick="goToScorers()">Eredmény mentése</button>
+        <button class="save" onclick="backToMatchList()">Vissza a főmenübe</button>
+      </div>
+      
+      <div id="playersSection">
+        <h2>⚽ Gólszerzők</h2>
+        <div class="player-row">
+          <div class="player-select-container">
+            <input type="text" class="player-select" placeholder="Játékos neve">
+            <span class="clear-btn" style="display: none;">❌</span>
+            <div class="autocomplete-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" onclick="addPlayer()">+ Játékos hozzáadása</button>
+      <button type="submit">Meccs mentése</button>
+    </form>
+  </div>
+
+  <!-- Jobb oldali oszlop: Statisztika -->
+  <div class="container" id="statsContainer">
+    <h2>📈 Összesített statisztika</h2>
+    <canvas id="summaryChart" height="100"></canvas>
+    <form action="logout.php" method="POST">
+      <button type="submit" class="logout-btn">Kijelentkezés</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
